@@ -9,6 +9,11 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 
+app.use((req, res, next) => {
+    res.append('X-Frame-Options', 'ALLOWALL');
+    next();
+});
+
 app.get('/', function (req, res) {
   res.render('index', {weather: null, error: null});
 })
